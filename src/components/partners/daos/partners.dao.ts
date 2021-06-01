@@ -1,6 +1,6 @@
 import { Partner } from '../interfaces/partners.interface';
 import debug from 'debug';
-import * as data from '../../../common/partners.json';
+import { data } from '../../../common/partners';
 
 const log: debug.IDebugger = debug('app:in-memory-dao');
 

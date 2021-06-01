@@ -50,7 +50,6 @@ app.get('/', (req: express.Request, res: express.Response) => {
 
 server.listen(port, () => {
   routes.forEach((route: CommonRoutes) => {
-    console.log('lkjkljklj', route.getName());
     debugLog(`Routes configured for ${route.getName()}`);
   });
   // our only exception to avoiding console.log(), because we

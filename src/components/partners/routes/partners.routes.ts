@@ -8,7 +8,7 @@ export class PartnersRoutes extends CommonRoutes {
   }
 
   configureRoutes() {
-    this.app.route(`/partners`).get(PartnersController.listPartners);
+    this.app.route(`/partners/:range`).get(PartnersController.listPartners);
 
     return this.app;
   }

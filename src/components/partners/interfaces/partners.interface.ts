@@ -14,3 +14,10 @@ export interface office {
   address: string;
   coordinates: string;
 }
+
+export interface MatchedPartner {
+  urlName?: string;
+  companyName?: string;
+  location?: office[];
+  dist?: number;
+}
