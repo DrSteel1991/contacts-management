@@ -1,6 +1,7 @@
 import PartnersDao from '../daos/partners.dao';
 import { CRUD } from '../../../common/interfaces/crud.interface';
-import { Partner, MatchedPartner } from '../interfaces/partners.interface';
+import { Partner, Office } from '../interfaces/partners.interface';
+import { PartnersRoutes } from '../routes/partners.routes';
 
 const userCoordinates = {
   latitude: 51.5144636,
@@ -10,24 +11,21 @@ const userCoordinates = {
 class PartnersService implements CRUD {
   async list(range: number) {
     const partners = await PartnersDao.getPartners();
-    let availablePartners: MatchedPartner[] = [];
-    partners.forEach((partner: Partner) => {
-      partner.offices.forEach(office => {
-        const coordinates = office.coordinates.split(',');
-        const dist = this.getDistance(
-          parseFloat(coordinates[0]),
-          parseFloat(coordinates[1])
-        );
-        if (dist <= range) {
-          availablePartners.push({
-            urlName: partner.urlName,
-            companyName: partner.organization,
-            location: partner.offices,
-          });
-        }
-      });
-    });
-    return availablePartners;
+    return partners
+      .map((partner: Partner) => ({
+        ...partner,
+        offices: partner.offices
+          .map((office: Office) => ({
+            ...office,
+            dist: this.getDistance(
+              parseFloat(office.coordinates.split(',')[0]),
+              parseFloat(office.coordinates.split(',')[1])
+            ),
+          }))
+          .filter(res => res.dist <= range),
+      }))
+      .filter(partner => partner.offices.length)
+      .sort((a, b) => (a.organization < b.organization ? -1 : 1));
   }
 
   getDistance(lat2: number, lon2: number): number {

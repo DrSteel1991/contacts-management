@@ -6,18 +6,11 @@ export interface Partner {
   willWorkRemotely: boolean;
   website: string | null;
   services: string;
-  offices: office[];
+  offices: Office[];
 }
 
-export interface office {
+export interface Office {
   location: string;
   address: string;
   coordinates: string;
-}
-
-export interface MatchedPartner {
-  urlName?: string;
-  companyName?: string;
-  location?: office[];
-  dist?: number;
 }
