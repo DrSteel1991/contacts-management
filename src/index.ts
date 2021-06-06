@@ -56,3 +56,5 @@ server.listen(port, () => {
   // always want to know when the server is done starting up
   console.log(runningMessage);
 });
+
+export default app;

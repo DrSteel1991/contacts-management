@@ -17,5 +17,5 @@ COPY . .
 RUN npm run build
 WORKDIR ./dist
 
-EXPOSE 3000
+EXPOSE 4000
 CMD node index.js

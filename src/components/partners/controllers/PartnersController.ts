@@ -6,8 +6,12 @@ const log: debug.IDebugger = debug('app:partners-controller');
 
 class PartnersController {
   async listPartners(req: express.Request, res: express.Response) {
-    const partners = await partnerService.list(parseInt(req.params.range));
-    res.status(200).send(partners);
+    try {
+      const partners = await partnerService.list(parseInt(req.params.range));
+      res.status(200).send({ error: null, data: partners });
+    } catch (err) {
+      res.status(500).send({ error: 1, data: [] });
+    }
   }
 }
 

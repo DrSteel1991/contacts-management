@@ -21,6 +21,7 @@ class PartnersService implements CRUD {
               parseFloat(office.coordinates.split(',')[0]),
               parseFloat(office.coordinates.split(',')[1])
             ),
+            coordinates: office.coordinates.split(','),
           }))
           .filter(res => res.dist <= range),
       }))
