@@ -1,7 +1,6 @@
 import PartnersDao from '../daos/partners.dao';
 import { CRUD } from '../../../common/interfaces/crud.interface';
 import { Partner, Office } from '../interfaces/partners.interface';
-import { PartnersRoutes } from '../routes/partners.routes';
 
 const userCoordinates = {
   latitude: 51.5144636,
